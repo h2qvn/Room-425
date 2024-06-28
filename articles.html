@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章列表 - 肆贰伍室</title>
+<style>
+  body {
+    font-family: '等线', sans-serif;
+    background-image: url('https://pic2.zhimg.com/v2-c74cf86a68d6e761b72df6c3966013a4_r.jpg'); /* 图片URL */
+    background-size: cover;
+    background-attachment: fixed; /* 设置背景图片固定不动 */
+    backdrop-filter: blur(2px); /* 添加虚化效果 */
+    margin: 0; /* 移除默认的边距 */
+    height: 80%; /* 设置高度为视口的100% */
+   }
+  header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  nav {
+    background-color: #444;
+    color: white;
+    padding: 20px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  .container {
+    padding: 20px;
+  }
+  .article {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 2px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>文章列表</h1>
+</header>
+
+<nav>
+  <a href="index.html">首页</a>
+  <a href="articles.html">内容</a>
+</nav>
+
+<div class="container">
+  <div class="article">
+    <h2>test_read_1</h2>
+    <p>This is a test articles page.</p>
+    <a href="read_1.html">阅读更多</a>
+  </div>
+  <div class="article">
+    <h2>人工智能与智能计算的发展</h2>
+    <p>人工智能领域近年来正在迎来一场由生成式人工智能大模型引领的爆发式发展</p>
+    <a href="人工智能与智能计算的发展.html">阅读更多</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>版权所有 © 2024 W.G.</p>
+</footer>
+
+</body>
+</html>
