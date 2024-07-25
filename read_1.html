@@ -8,7 +8,8 @@
   body, html {
     height: 100%;
     margin: 0;
-    font-family: '等线', sans-serif;
+    font-family: Helvetica, Tahoma, Arial, "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei";
+	font-family: Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei";
   }
   .bg-image {
     background-image: url('https://pic2.zhimg.com/v2-c74cf86a68d6e761b72df6c3966013a4_r.jpg');
@@ -25,6 +26,7 @@
     margin: auto;
     background: #fff;
     padding: 20px;
+    text-align: center; /* 居中对齐 */
   }
   .header {
     font-size: 24px;
@@ -46,6 +48,24 @@
   }
   .article-content {
     padding: 20px;
+    text-align: left; /* 文章内容左对齐 */
+    background: #fff; /* 白色背景 */
+    margin: auto; /* 居中对齐 */
+    width: 80%; /* 设置宽度 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    border-radius: 10px; /* 圆角 */
+    font-size: 18px; /* 调整字体大小 */
+    line-height: 1.6; /* 行高 */
+  }
+  pre {
+    background: #f5f5f5; /* 代码块背景 */
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+  }
+  code {
+    font-family: 'Courier New', Courier, monospace; /* 代码字体 */
+    font-size: 16px;
   }
   .footer {
     background-color: #333;
@@ -56,7 +76,17 @@
     bottom: 0;
     width: 100%;
   }
+  .customize-options {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .customize-options label {
+    margin-right: 10px;
+  }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/marked/0.8.1/marked.min.js"></script>
 </head>
 <body>
 
@@ -64,25 +94,66 @@
   <div class="overlay">
     <div class="header">Room - 425</div>
     <div class="nav-tabs">
-      <a href="index">首页</a>
+      <a href="index.html">首页</a>
+      <a href="article.html">内容</a>
     </div>
-    <div class="article-content">
-      <!-- 文章内容 -->
-      <h1>文章标题</h1>
+    <div class="customize-options">
+      <label for="font-select">选择字体：</label>
+      <select id="font-select" onchange="customizeFont()">
+        <option value="'等线', sans-serif,serif">等线</option>
+		<option value="'SimSun', sans-serif,serif">宋体</option>
+        <option value="Arial, sans-serif,serif">Arial</option>
+        <option value="'Times New Roman',sans-serif, serif">Times New Roman</option>
+      </select>
+      <label for="font-size">文字大小：</label>
+      <input type="number" id="font-size" value="18" onchange="customizeFont()" /> px
+    </div>
+    <div id="markdown-content" class="article-content">
+      <!-- 文章内容将由JavaScript加载 -->
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="article-meta">发布日期：2024-04-25 | 作者：W.G.</div>
-  <div class="article-content">
-    <p>这里是文章内容。这个文章阅读页面提供了一个清晰、专注的阅读体验，让读者可以沉浸在文章内容中。</p>
-  </div>
 </div>
 
 <div class="footer">
   <p>版权所有 © 2024 W.G.</p>
 </div>
+
+<script>
+  // 确保marked库已加载
+  document.addEventListener("DOMContentLoaded", function() {
+    // 加载Markdown文件并转换为HTML
+    fetch('README_CN.md')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.text();
+      })
+      .then(text => {
+        const content = marked(text);
+        document.getElementById('markdown-content').innerHTML = content;
+        // 初始化代码高亮
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      })
+      .catch(error => console.error('Error fetching the Markdown file:', error));
+  });
+
+  // 自定义字体和文字大小
+  function customizeFont() {
+    const fontSelect = document.getElementById('font-select').value;
+    const fontSize = document.getElementById('font-size').value + 'px';
+    document.body.style.fontFamily = fontSelect;
+    document.querySelectorAll('.article-content').forEach(function(element) {
+      element.style.fontSize = fontSize;
+    });
+  }
+</script>
 
 </body>
 </html>
